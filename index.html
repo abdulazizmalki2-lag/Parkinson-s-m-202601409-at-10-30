@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البوابة التثقيفية الشاملة لمرض باركنسون (الشلل الرعاش)</title>
+    <!-- استيراد خط كايو العربي -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0d9488;
+            --accent: #f0fdf4;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-body: #f8fafc;
+            --card-bg: #ffffff;
+            --radius: 16px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 50px;
+        }
+
+        /* شريط التنقل العلوي التفاعلي */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            z-index: 1000;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: var(--transition);
+            background: #f1f5f9;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* ترويسة الصفحة */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: var(--radius);
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 850px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* الأقسام العامة */
+        section {
+            margin-bottom: 40px;
+            scroll-margin-top: 90px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 8px;
+        }
+
+        /* شبكة البطاقات */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--secondary);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card ul {
+            list-style-type: none;
+            padding-right: 0;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-right: 22px;
+            margin-bottom: 12px;
+            font-size: 0.98rem;
+        }
+
+        .card ul li::before {
+            content: "✓";
+            color: var(--secondary);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        /* تنسيق الصور المضافة */
+        .img-container {
+            margin-top: 15px;
+            text-align: center;
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* مقارنة التشخيص */
+        .scan-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .scan-card {
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .scan-card.abnormal {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .scan-card.normal {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        /* تذييل الصفحة */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 60px;
+            background: white;
+            border-radius: var(--radius);
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.1rem; }
+            .scan-compare { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي التفاعلي -->
+    <nav>
+        <a href="#overview">التعريف والأسباب</a>
+        <a href="#brain-anatomy">تشريح الدماغ والمادة السوداء</a>
+        <a href="#symptoms">الأعراض (حركية وغير حركية)</a>
+        <a href="#diagnosis">التشخيص والفحوصات</a>
+        <a href="#treatment">العلاج والعلاج المبكر</a>
+        <a href="#coping">طرق التعايش والسلوكيات</a>
+    </nav>
+
+    <div class="container">
+        <!-- ترويسة الصفحة -->
+        <header>
+            <h1>مرض باركنسون (الشلل الرعاش)</h1>
+            <p>دليلك الطبي التثقيفي الشامل لفهم المرض، تشخيصه، طرقه العلاجية، واستراتيجيات التعايش اليومي.</p>
+        </header>
+
+        <!-- 1. التعريف والأسباب -->
+        <section id="overview">
+            <div class="section-title">🧠 التعريف والأسباب وعوامل الخطورة</div>
+            <div class="grid">
+                <div class="card">
+                    <h3>ما هو مرض باركنسون؟</h3>
+                    <ul>
+                        <li>اضطراب عصبي تنكسي مزمن يؤثر بشكل رئيسي على الحركة في الجهاز العصبي المركزي.</li>
+                        <li>يحدث نتيجة نقص مادة الدوبامين في الدماغ بسبب تدهور الخلايا العصبية في "المادة السوداء" (Substantia Nigra).</li>
+                        <li>يبدأ عادة في عمر 60 سنة فما فوق، ولكن قد يظهر أحياناً في سن أصغر.</li>
+                        <li>لا يُعد مرضاً وراثياً في الغالبية العظمى من الحالات.</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-top-color: #d97706;">
+                    <h3>الأسباب وعوامل الخطورة</h3>
+                    <ul>
+                        <li><strong>تلف الخلايا:</strong> موت وتلف الخلايا المنتجة للدوبامين في المادة السوداء.</li>
+                        <li><strong>العوامل الوراثية:</strong> طفرات جينية نادرة محتملة (مثل جينات LRRK2).</li>
+                        <li><strong>التقدم في العمر:</strong> العامل الأساسي الأكثر ارتباطاً بزيادة الاحتمالية.</li>
+                        <li><strong>التعرض البيئي:</strong> التعرض السابق لبعض السموم البيئية والمبيدات الحشرية.</li>
+                        <li><strong>التاريخ العائلي:</strong> وجود إصابات سابقة في العائلة (وهو أمر نادر نسبياً).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. تشريح الدماغ والمادة السوداء (مع الصورة الأولى) -->
+        <section id="brain-anatomy">
+            <div class="section-title">🔬 تشريح الدماغ ودور الدوبامين</div>
+            <div class="grid">
+                <div class="card">
+                    <h3>موقع المادة السوداء في الدماغ</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 10px;">تقع المادة السوداء (Substantia Nigra) وجذع الدماغ عميقاً داخل المخ، وبالقرب من النواة المتكئة (جزء من الجهاز الحوفي) المسؤولة عن تنظيم الحركة والعواطف.</p>
+                    
+                    <!-- إدراج الصورة الأولى -->
+                    <div class="img-container">
+                        <img src="brain_anatomy.png" alt="موقع المادة السوداء ومقطع عرضي في الدماغ">
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">موقع المادة السوداء في الدماغ ومقطع عرضي يوضح الجانبين الأيمن والأيسر</p>
+                    </div>
+                </div>
+
+                <div class="card" style="border-top-color: #0284c7;">
+                    <h3>خلايا الدوبامين والمسار العصبى</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 10px;">تتكون الخلية العصبية الدوبامينية من جسم الخلية، التفرعات الشجرية، المحور العصبي، والنهايات العصبية التي تفرز الدوبامين المسؤول عن التحكم في الحركة والتحفيز.</p>
+                    
+                    <!-- إدراج الصورة الثانية (المسار الدوباميني) -->
+                    <div class="img-container">
+                        <img src="dopaminergic_pathway.png" alt="المسار الدوباميني في الدماغ">
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">المسار الدوباميني وتأثير التدهور في مرض باركنسون</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. الأعراض -->
+        <section id="symptoms">
+            <div class="section-title">📋 أعراض مرض باركنسون</div>
+            <div class="grid">
+                <div class="card" style="border-top-color: #e11d48;">
+                    <h3>الأعراض الحركية (الأكثر شيوعاً)</h3>
+                    <ul>
+                        <li><strong>الرعاش:</strong> خصوصاً أثناء الراحة وغالباً في الأطراف.</li>
+                        <li><strong>بطء الحركة:</strong> صعوبة في البدء بالحركات اليومية وتنفيذها.</li>
+                        <li><strong>تيبس العضلات:</strong> شعور بالصلابة والمقاومة عند تحريك الأطراف.</li>
+                        <li><strong>خلل التوازن والمشي:</strong> خطوات قصيرة وسرعة تعثر محتملة.</li>
+                        <li><strong>تغيرات بصرية وصوتية:</strong> ضعف وخط أصغر حجماً في الكتابة، وانخفاض طبقة الصوت.</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-top-color: #7c3aed;">
+                    <h3>الأعراض غير الحركية</h3>
+                    <ul>
+                        <li><strong>الاضطرابات النفسية:</strong> الشعور بالإكتئاب، القلق، وتقلبات المزاج.</li>
+                        <li><strong>اضطرابات النوم:</strong> الأرق وأحلام مزعجة مرتبطة بالنوم.</li>
+                        <li><strong>فقدان حاسة الشم:</strong> وغالباً ما يسبق الأعراض الحركية.</li>
+                        <li><strong>الجهاز الهضمي:</strong> الإصابة المزمنة بالإمساك.</li>
+                        <li><strong>الجهاز العصبي المستقل:</strong> انخفاض ضغط الدم المفاجئ عند الوقوف.</li>
+                        <li>مشاكل خفيفة في التفكير والذاكرة تظهر غالباً في المراحل المتقدمة.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. التشخيص والفحوصات -->
+        <section id="diagnosis">
+            <div class="section-title">🔍 الفحوصات والتشخيص الطبي</div>
+            <div class="card">
+                <h3>كيف يتم تشخيص باركنسون؟</h3>
+                <p style="margin-bottom: 15px;">يعتمد التشخيص بشكل أساسي على التقييم الإكلينيكي الدقيق:</p>
+                <ul style="margin-bottom: 20px;">
+                    <li><strong>الفحص السريري الدقيق:</strong> تقييم الأعراض والعلامات الحركية الظاهرة.</li>
+                    <li><strong>التاريخ الطبي والمرضي المفصل:</strong> لمراجعة تطور الأعراض واستبعاد الأسباب الأخرى.</li>
+                    <li><strong>التصوير العصبي المتقدم:</strong> مثل استخدام مسح (DaTScan) لتقييم كفاءة ناقلات الدوبامين في الدماغ.</li>
+                </ul>
+
+                <div class="scan-compare">
+                    <div class="scan-card normal">
+                        <strong>دماغ طبيعي</strong>
+                        <p style="font-size:0.85rem; margin-top:5px;">توزيع طبيعي وسليم لكثافة امتصاص الدوبامين.</p>
+                    </div>
+                    <div class="scan-card abnormal">
+                        <strong>مريض باركنسون</strong>
+                        <p style="font-size:0.85rem; margin-top:5px;">نقص ملحوظ وواضح في امتصاص الدوبامين بالمناطق المستهدفة.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. العلاج والعلاج المبكر -->
+        <section id="treatment">
+            <div class="section-title">💊 الخيارات العلاجية وأهمية الاكتشاف المبكر</div>
+            <div class="grid">
+                <div class="card">
+                    <h3>الخيارات العلاجية المتاحة</h3>
+                    <ul>
+                        <li><strong>أولاً: الأدوية الدوائية:</strong> مثل "ليفودوبا" (الأكثر فعالية)، ناهضات الدوبامين، ومثبطات (MAO-B و COMT).</li>
+                        <li><strong>ثانياً: التدخلات الجراحية:</strong> جراحة تحفيز الدماغ العميق (DBS) وتُستخدم عادة في الحالات المتقدمة.</li>
+                        <li><strong>ثالثاً: العلاجات الداعمة:</strong> العلاج الطبيعي، العلاج الوظيفي، تحسين النطق، والدعم النفسي والاجتماعي.</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-top-color: #10b981;">
+                    <h3>أهمية العلاج المبكر ونصائح مهمة</h3>
+                    <ul style="margin-bottom: 15px;">
+                        <li><strong>تحسين جودة الحياة:</strong> التدخل المبكر يحافظ على استقلالية المريض لفترة أطول.</li>
+                        <li><strong>إبطاء التأثيرات الحركية:</strong> يقلل من تطور الإعاقة ويضبط المضاعفات بفاعلية.</li>
+                    </ul>
+                    <div style="background: var(--accent); padding: 12px; border-radius: 8px; font-size: 0.92rem; color: #065f46;">
+                        💡 <strong>حقائق أساسية:</strong> المرض لا ينتقل بالعدوى، ولا يوجد علاج شافٍ تماماً حتى الآن، لكن الرعاية المنتظمة والمتابعة الطبية تضمن عيش حياة كريمة ومستقرة.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. طرق التعايش والسلوكيات اليومية الموصى بها -->
+        <section id="coping">
+            <div class="section-title">🌱 طرق التعايش والسلوكيات اليومية الموصى بها</div>
+            <div class="grid">
+                <div class="card">
+                    <h3>1. النشاط البدني والتمارين</h3>
+                    <ul>
+                        <li><strong>ممارسة التمارين:</strong> أداء التمارين بحسب مقدرة الشخص (يعني يسوي التمارين اللي يقدر عليها) مثل المشي الخفيف أو الأنشطة البسيطة لتعزيز الحركة.</li>
+                        <li><strong>تمارين التوازن:</strong> تساعد بشكل فعال في تقليل معدل السقوط وتحسين المدى الحركي للمفاصل قدر المستطاع.</li>
+                        <li>الاستمرارية تحت إشراف أخصائي العلاج الطبيعي تلعب دوراً محورياً في الحفاظ على قوة العضلات.</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-top-color: #0284c7;">
+                    <h3>2. تعديل البيئة المنزلية للسلامة</h3>
+                    <ul>
+                        <li><strong>إزالة العوائق:</strong> التخلص من السجاد الانزلاقي والأسلاك الأرضية المبعثرة في ممرات المنزل.</li>
+                        <li><strong>تركيب مقابض الأمان:</strong> وضع مقابض تثبيت داخل الحمامات وبجانب السلالم.</li>
+                        <li><strong>الإضاءة الجيدة:</strong> التأكد من إنارة الممرات وغرف النوم لتجنب التعثر.</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-top-color: #d97706;">
+                    <h3>3. التغذية السليمة والعناية الذاتية</h3>
+                    <ul>
+                        <li><strong>تجنب الإمساك:</strong> الإكثار من شرب السوائل وتناول الأطعمة الغنية بالألياف للحد من الإمساك.</li>
+                        <li><strong>تنظيم مواعيد الأدوية:</strong> تناول الأدوية بحسب إرشادات الطبيب بدقة مع الانتباه لتأثير بعض الوجبات الغنية بالبروتين على امتصاص الأدوية.</li>
+                        <li>الحفاظ على ترطيب الجسم طوال اليوم.</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-top-color: #7c3aed;">
+                    <h3>4. الدعم النفسي والاجتماعي</h3>
+                    <ul>
+                        <li><strong>التواصل الاجتماعي:</strong> الانخراط في أنشطة عائلية ومجتمعية وعدم الانعزال لتقليل معدلات القلق والاكتئاب.</li>
+                        <li><strong>مجموعات الدعم:</strong> مشاركة التجارب مع أشخاص يعانون من نفس الظروف لتخفيف العبء النفسي.</li>
+                        <li>طلب الاستشارة النفسية المتخصصة عند الحاجة لدعم الصحة العقلية والمزاجية.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- تذييل الصفحة -->
+        <footer>
+            <p>تم إعداد هذه البوابة التثقيفية لرفع الوعي الصحي حول مرض باركنسون &copy; 2026</p>
+        </footer>
+    </div>
+
+</body>
+</html>
